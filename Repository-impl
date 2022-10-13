@@ -1,0 +1,53 @@
+@Repository
+
+public class EmployeeRepositoryImpl implements EmployeeRepository{
+	
+	@Autowired
+	EntityManager entityManager;
+
+	@Override
+	public List<Employee> findAll() {
+
+		Session currentSession = entityManager.unwrap(Session.class);
+		
+		Query<Product> query = currentSession.createQuery("select e from Employee e", Employee.class);
+		List<Employee> employees = query.getResultList();
+		return employees;
+	}
+
+	@Override
+	public Employee findById(Long id) {
+
+		Session currentSession = entityManager.unwrap(Session.class);
+		return currentSession.get(Employee.class, id);
+	}
+
+
+	@Transactional
+	@Override
+	public void save(Employee e) {
+
+		Session currentSession = entityManager.unwrap(Session.class);
+		currentSession.save(e);
+	}
+
+	@Transactional
+	@Override
+	public void update(Employee e) {
+
+		Session currentSession = entityManager.unwrap(Session.class);
+		currentSession.saveOrUpdate(e);
+	}
+
+	@Transactional
+	@Override
+	public void deleteById(Long id) {
+
+		Session currentSession = entityManager.unwrap(Session.class);
+		Query<Employee> query = currentSession.createQuery("delete from Employee where id = :userid");
+		query.setParameter("userid", id);
+	}
+	
+	
+	
+}

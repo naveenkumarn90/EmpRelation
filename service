@@ -1,0 +1,7 @@
+public interface EmployeeService {
+
+	public List<Employee> findAll();
+	public void save(Employee emp);
+	public Employee findById(Long id);
+	public void deleteById(Long id);
+}

@@ -1,0 +1,10 @@
+public interface EmployeeRepository {
+
+	public List<Employee> findAll();
+	
+	public Employee findById(Long id);
+	public void save(Employee e);
+	public void update(Employee e);
+	public void deleteById(Long id);
+	
+}
